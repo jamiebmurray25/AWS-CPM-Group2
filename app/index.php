@@ -13,5 +13,7 @@
 <h1><?php echo $test ?></h1>
 <h1><?php echo $x ?></h1>
 
+<h2>This is a test</h2>
+
 </body>
 </html>
