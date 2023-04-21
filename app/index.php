@@ -1,19 +1,33 @@
 <?php
-    $test = "hello world";
-    $x = "David is here";
-?>  
+$servername = "localhost";
+$username = "root";
+$dbname = "myDB";
 
-<!DOCTYPE html>
-<html>
-<head>
-  <link rel="stylesheet" href="assets/index.css">
-</head>
-<body>
+$customer_id = $_GET["id"];
 
-<h1><?php echo $test ?></h1>
-<h1><?php echo $x ?></h1>
+$conn = new mysqli($servername, $username, null, $dbname);
 
-<h2>This is a test</h2>
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
 
-</body>
-</html>
+$sql = "SELECT * FROM customer WHERE customer_id = $customer_id";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows) {
+  $row = $result->fetch_assoc();
+} else {
+  echo "No customer found for that ID";
+  die();
+}
+
+?>
+
+<ol>
+  <?php
+  foreach ($row as $column) {
+    echo "<li>" . $column . "</li>";
+  }
+  ?>
+</ol>
