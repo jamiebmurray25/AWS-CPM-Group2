@@ -1,19 +1,26 @@
 <?php
-    $test = "hello world";
-    $x = "David is here";
-?>  
+$servername = "localhost";
+$username = "root";
+$dbname = "myDB";
 
-<!DOCTYPE html>
-<html>
-<head>
-  <link rel="stylesheet" href="assets/index.css">
-</head>
-<body>
+// Create connection
+$conn = new mysqli($servername, $username, null, $dbname);
 
-<h1><?php echo $test ?></h1>
-<h1><?php echo $x ?></h1>
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
 
-<h2>This is a test</h2>
+$sql = "SELECT * FROM customer";
 
-</body>
-</html>
+$result = $conn->query($sql);
+?>
+
+
+<ol>
+  <?php
+  while ($row = $result->fetch_assoc()) {
+    echo "<li>" .  $row["first_name"] . "</li>";
+  }
+  ?>
+</ol>
