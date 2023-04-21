@@ -3,13 +3,15 @@ $servername = "localhost";
 $username = "root";
 $dbname = "myDB";
 
+$customer_id = $_GET["id"];
+
 $conn = new mysqli($servername, $username, null, $dbname);
 
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT * FROM customer WHERE customer_id = 1";
+$sql = "SELECT * FROM customer WHERE customer_id = $customer_id";
 
 $result = $conn->query($sql);
 
