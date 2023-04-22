@@ -26,193 +26,58 @@ function selectAll($conn){
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
-  <style>
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    background-color: #F1F1F1;
-    font-family: "Lato", sans-serif;
-  }
-
-  .main {
-    margin-left: 120px;
-  }
-
-  .sidenav {
-    position: relative;
-    height: 100%;
-    width: 90px;
-    position: fixed;
-    vertical-align: middle;
-    text-align: center;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #FFFFFF;
-    overflow-x: hidden;
-    padding-top: 20px;
-  }
-
-  .sidenav a {
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-  }
-
-  .sidenav a:hover {
-    color: #f1f1f1;
-  }
-
-  .sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-  }
-
-  .topnav {
-    padding: 8px 32px 8px 8px;
-    text-align:right;
-    background-color: #F1F1F1;
-    overflow: hidden;
-  }
-
-  .customerprofile {
-    padding: 12px 12px 12px 12px;
-    background-color: #D9D9D9;
-  }
-
-  .customerreports {
-    padding: 12px 12px 12px 12px;
-    background-color: #F1F1F1;
-  }
-
-  .columnThree {
-    float: left;
-    width: 33.33%;
-    padding: 18px;
-  }
-
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-
-  .button {
-    border: none;
-    color: black;
-    padding: 12px 18px 12px 18px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-  }
-
-  .buttonSignout { 
-    background-color: #D9D9D9;
-    border-radius: 8px; 
-  }
-
-  .styled-table {
-    background-color: white;
-    border-collapse: collapse;
-    font-size: 0.9em;
-    min-width: 400px;
-  }
-
-  .styled-table {
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 400px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-  }
-
-  .styled-table thead tr {
-    background-color: #D9D9D9;
-    color: black;
-    text-align: left;
-  }
-
-  .styled-table th,
-  .styled-table td {
-      padding: 12px 15px;
-      text-align: center;
-  }
-
-  .styled-table tbody tr {
-    border-bottom: 1px solid #dddddd;
-  }
-
-
-
-  .styled-table tbody tr:nth-of-type(even) {
-      background-color: #f3f3f3;
-  }
-
-  .styled-table tbody tr:last-of-type {
-      border-bottom: 2px solid #D9D9D9;
-  }
-
-  #main-content{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-  }
-
-  #delete-btn{
-    padding: 10px 20px;
-    border: 1px solid red;
-    color: red;
-    background-color: white;
-    border-radius: 10px;
-    font-weight: 800;
-    transition: all 0.1s;
-  }
-
-  #delete-btn:hover{
-    background-color: red;
-    color: white;
-  }
-
-  #add-btn{
-    position: relative;
-    margin-left: 1000px;
-    padding: 10px 20px;
-    border: 1px solid green;
-    color: green;
-    background-color: white;
-    border-radius: 50px;
-    font-weight: 800;
-    margin-bottom: 10px;
-    transition: all 0.1s;
-  }
-
-  #add-btn:hover{
-    background-color: green;
-    color: white;
-  }
-
-
-
-  @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
-  }
-  </style>
+  <link rel="stylesheet" href="assets/css/index.css">
 </head>
 <body>
+
+<!-- Add form -->
+  <div class="modal" id="add-form">
+    <div class="modal-content" id="form-content">
+      <h2>New Client Information</h2>
+        <form action="." method="POST">
+          <input type="hidden" name="action" value="add">
+          <label for="first-name">First Name:</label>
+          <input type="text" id="first-name" name="first-name" required>
+
+          <label for="last-name">Last Name:</label>
+          <input type="text" id="last-name" name="last-name" required>
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+
+          <label for="phone">Phone Number:</label>
+          <input type="tel" id="phone" name="phone" required>
+
+          <label for="risk-profile">Risk Profile:</label>
+          <select id="risk-profile" name="risk-profile" required>
+            <option value="">--Select--</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+
+          <label for="portfolio-value">Portfolio Value:</label>
+          <input type="number" id="portfolio-value" name="portfolio-value" required>
+
+          <button type="submit">Submit</button>
+        </form>
+    </div>
+  </div>
+
+  <div class="modal" id="delete-confirmation">
+    <div class="modal-content" id = "confirmation-content">
+      <h2>Are you sure ?</h2>
+      <h3>You are going to delete a client.</h3>
+      <form action="." method="POST">
+        <input type="hidden" name="action" value="delete">
+        <input type="hidden" name="customerId" value="">
+        <button id="submit-btn" type="submit">Yes</button>
+      </form>
+    </div>
+  </div>
+  
+  <div id="overlay"></div>
+  
   <div id="mySidenav" class="sidenav">
     <a href="."> <img src="assets\images\homeicon.png" alt="Home" style="width:40px;height:40px;"></a>
   </div>
@@ -222,7 +87,7 @@ function selectAll($conn){
 
   <div id="main-content">
     <h1>AWS Clients List</h1>
-    <button id="add-btn">Add Client</button>
+    <button id="add-btn" onclick="openAddForm()">Add Client</button>
     <div style="overflow: auto; max-height: 500px;">
       <table class="styled-table">
         <thead>
@@ -248,16 +113,16 @@ function selectAll($conn){
                 $assessed = "Done";
               }
 
-              echo "<tr onclick={$clicklocation}>";
-              echo "<td>{$row['customer_id']}</td>";
-              echo "<td>{$row['first_name']}</td>";
-              echo "<td>{$row['last_name']}</td>";
-              echo "<td>{$row['email']}</td>";
-              echo "<td>{$row['phone_number']}</td>";
-              echo "<td>{$row['risk_profile']}</td>";
-              echo "<td>{$row['portfolio_value']}</td>";
-              echo "<td>{$assessed}</td>";
-              echo "<td><button id='delete-btn'>Delete</button></td>";
+              echo "<tr>";
+              echo "<td onclick={$clicklocation}>{$row['customer_id']}</td>";
+              echo "<td onclick={$clicklocation}>{$row['first_name']}</td>";
+              echo "<td onclick={$clicklocation}>{$row['last_name']}</td>";
+              echo "<td onclick={$clicklocation}>{$row['email']}</td>";
+              echo "<td onclick={$clicklocation}>{$row['phone_number']}</td>";
+              echo "<td onclick={$clicklocation}>{$row['risk_profile']}</td>";
+              echo "<td onclick={$clicklocation}>{$row['portfolio_value']}</td>";
+              echo "<td onclick={$clicklocation}>{$assessed}</td>";
+              echo "<td><button id='delete-btn' onclick='openDeleteConfirmation({$row['customer_id']})'>Delete</button></td>";
               echo "</tr>";
             }
             ?>
@@ -266,5 +131,48 @@ function selectAll($conn){
     </div>
   </div>
 </div>
+<script>
+  function openAddForm() {
+    // Show the modal and overlay
+    document.querySelector("#add-form").style.display = "block";
+    document.querySelector("#overlay").style.display = "block";
+
+    // Disable scrolling on the background
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeAddForm() {
+    // Hide the modal and overlay
+    document.querySelector("#add-form").style.display = "none";
+    document.querySelector("#overlay").style.display = "none";
+
+    // Enable scrolling on the background
+    document.body.style.overflow = "auto";
+  }
+
+  function openDeleteConfirmation(id) {
+    // Show the modal and overlay
+    document.querySelector("#delete-confirmation").style.display = "block";
+    document.querySelector('input[name="customerId"]').value = id;
+    document.querySelector("#overlay").style.display = "block";
+
+    // Disable scrolling on the background
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeDeleteConfirmation() {
+    // Hide the modal and overlay
+    document.querySelector("#delete-confirmation").style.display = "none";
+    document.querySelector("#overlay").style.display = "none";
+
+    // Enable scrolling on the background
+    document.body.style.overflow = "auto";
+  }
+
+
+  // Close the modal when the user clicks outside of it
+  document.getElementById("overlay").addEventListener("click", closeAddForm);
+   document.getElementById("overlay").addEventListener("click", closeDeleteConfirmation);
+</script>
 </body>
 </html>

@@ -1,3 +1,263 @@
-h1 {
+* {
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: #F1F1F1;
+    font-family: "Lato", sans-serif;
+  }
+
+  .main {
+    margin-left: 120px;
+  }
+
+  .sidenav {
+    position: relative;
+    height: 100%;
+    width: 90px;
+    position: fixed;
+    vertical-align: middle;
+    text-align: center;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #FFFFFF;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+
+  .sidenav a {
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+
+  .topnav {
+    padding: 8px 32px 8px 8px;
+    text-align:right;
+    background-color: #F1F1F1;
+    overflow: hidden;
+  }
+
+  .customerprofile {
+    padding: 12px 12px 12px 12px;
+    background-color: #D9D9D9;
+  }
+
+  .customerreports {
+    padding: 12px 12px 12px 12px;
+    background-color: #F1F1F1;
+  }
+
+  .columnThree {
+    float: left;
+    width: 33.33%;
+    padding: 18px;
+  }
+
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .button {
+    border: none;
+    color: black;
+    padding: 12px 18px 12px 18px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .buttonSignout { 
+    background-color: #D9D9D9;
+    border-radius: 8px; 
+  }
+
+  .styled-table {
+    background-color: white;
+    border-collapse: collapse;
+    font-size: 0.9em;
+    min-width: 400px;
+  }
+
+  .styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .styled-table thead tr {
+    background-color: #D9D9D9;
+    color: black;
+    text-align: left;
+  }
+
+  .styled-table th,
+  .styled-table td {
+      padding: 12px 15px;
+      text-align: center;
+  }
+
+  .styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+  }
+
+
+
+  .styled-table tbody tr:nth-of-type(even) {
+      background-color: #f3f3f3;
+  }
+
+  .styled-table tbody tr:last-of-type {
+      border-bottom: 2px solid #D9D9D9;
+  }
+
+  #main-content{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #delete-btn{
+    padding: 10px 20px;
+    border: 1px solid red;
     color: red;
+    background-color: white;
+    border-radius: 10px;
+    font-weight: 800;
+    transition: all 0.1s;
+  }
+
+  #delete-btn:hover{
+    background-color: red;
+    color: white;
+  }
+
+  #add-btn{
+    position: relative;
+    margin-left: 1000px;
+    padding: 10px 20px;
+    border: 1px solid green;
+    color: green;
+    background-color: white;
+    border-radius: 50px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    transition: all 0.1s;
+  }
+
+  #add-btn:hover{
+    background-color: green;
+    color: white;
+  }
+
+  /* Hide the modal and overlay by default */
+  .modal,
+  #overlay {
+    display: none;
+  }
+
+  /* Style the overlay to cover the whole screen */
+  #overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    /* Make the overlay slightly transparent */
+    backdrop-filter: blur(5px);
+  }
+
+  /* Center the modal vertically and horizontally */
+  .modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
+
+  /* Style the modal content */
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+  }
+
+  /* Center the form and set the font */
+form {
+  width: 500px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+/* Style the labels */
+form label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Style the input fields */
+form input, form select {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Style the submit button */
+form button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: green;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Change the submit button color on hover */
+form button:hover {
+  background-color: #3e8e41;
+}
+
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
 }
