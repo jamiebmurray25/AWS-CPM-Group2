@@ -9,7 +9,6 @@ CREATE TABLE IF NOT EXISTS customer(
     email VARCHAR(100) NOT NULL,
     phone_number VARCHAR(20),
     risk_profile VARCHAR(20) NOT NULL,
-    portfolio_value DECIMAL(15,2) NOT NULL,
     portfolio_assessed BOOLEAN NOT NULL,
     advice_description VARCHAR(255),
     advice_date DATE
@@ -17,37 +16,37 @@ CREATE TABLE IF NOT EXISTS customer(
 
 -- CREATE INVESTMENT TABLE
 CREATE TABLE IF NOT EXISTS investment (
-  Investment_id INT AUTO_INCREMENT PRIMARY KEY,
+  investment_id INT AUTO_INCREMENT PRIMARY KEY,
   customer_id INT NOT NULL,
   asset_name VARCHAR(255) NOT NULL,
   asset_type VARCHAR(50) NOT NULL,
-  date_accuired DATE,
+  date_acquired DATE,
   asset_initial_value DECIMAL(15, 2) NOT NULL,
   asset_current_value DECIMAL(15, 2) NOT NULL,
-  FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
+  FOREIGN KEY (customer_id) REFERENCES customer(customer_id) ON DELETE CASCADE
 );
 
 -- Dummy data for customer table
-INSERT INTO customer (first_name, last_name, email, phone_number, risk_profile, portfolio_value, portfolio_assessed, advice_description, advice_date) VALUES
-('John', 'Doe', 'john.doe@example.com', '555-1234', 'Low Risk', 5000.00, true, 'Invest in Bonds', '2022-02-01'),
-('Jane', 'Doe', 'jane.doe@example.com', '555-5678', 'High Risk', 10000.00, true, 'Invest in Stocks', '2022-02-02'),
-('Bob', 'Smith', 'bob.smith@example.com', '555-2468', 'Medium Risk', 7500.00, true, 'Invest in Real Estate', '2022-02-03'),
-('Alice', 'Johnson', 'alice.johnson@example.com', '555-1357', 'Low Risk', 3000.00, false, NULL, NULL),
-('Charlie', 'Brown', 'charlie.brown@example.com', '555-7890', 'High Risk', 15000.00, true, 'Invest in Mutual Funds', '2022-02-04'),
-('Emily', 'Davis', 'emily.davis@example.com', '555-3698', 'Low Risk', 6000.00, true, 'Invest in Savings Account', '2022-02-05'),
-('Frank', 'White', 'frank.white@example.com', '555-9753', 'Medium Risk', 8000.00, false, NULL, NULL),
-('Grace', 'Wilson', 'grace.wilson@example.com', '555-7412', 'High Risk', 20000.00, true, 'Invest in Stocks', '2022-02-06'),
-('Henry', 'Lee', 'henry.lee@example.com', '555-8520', 'Low Risk', 4000.00, true, 'Invest in Bonds', '2022-02-07'),
-('Isabella', 'Clark', 'isabella.clark@example.com', '555-4680', 'Medium Risk', 9000.00, false, NULL, NULL),
-('James', 'Wong', 'james.wong@example.com', '555-2468', 'High Risk', 12000.00, true, 'Invest in Mutual Funds', '2022-02-08'),
-('Karen', 'Garcia', 'karen.garcia@example.com', '555-1234', 'Low Risk', 5500.00, true, 'Invest in Real Estate', '2022-02-09'),
-('Luke', 'Martinez', 'luke.martinez@example.com', '555-3698', 'Medium Risk', 7000.00, false, NULL, NULL),
-('Mary', 'Gonzalez', 'mary.gonzalez@example.com', '555-9753', 'High Risk', 18000.00, true, 'Invest in Savings Account', '2022-02-10'),
-('Nathan', 'Johnson', 'nathan.johnson@example.com', '555-8520', 'Low Risk', 4500.00, true, 'Invest in Stocks', '2022-02-11'),
-('Olivia', 'Hernandez', 'olivia.hernandez@example.com', '555-1234', 'Medium Risk', 8500.00, false, NULL, NULL);
+INSERT INTO customer (first_name, last_name, email, phone_number, risk_profile, portfolio_assessed, advice_description, advice_date) VALUES
+('John', 'Doe', 'john.doe@example.com', '555-1234', 'Low Risk', true, 'Invest in Bonds', '2022-02-01'),
+('Jane', 'Doe', 'jane.doe@example.com', '555-5678', 'High Risk', true, 'Invest in Stocks', '2022-02-02'),
+('Bob', 'Smith', 'bob.smith@example.com', '555-2468', 'Medium Risk', true, 'Invest in Real Estate', '2022-02-03'),
+('Alice', 'Johnson', 'alice.johnson@example.com', '555-1357', 'Low Risk', false, NULL, NULL),
+('Charlie', 'Brown', 'charlie.brown@example.com', '555-7890', 'High Risk', true, 'Invest in Mutual Funds', '2022-02-04'),
+('Emily', 'Davis', 'emily.davis@example.com', '555-3698', 'Low Risk', true, 'Invest in Savings Account', '2022-02-05'),
+('Frank', 'White', 'frank.white@example.com', '555-9753', 'Medium Risk', false, NULL, NULL),
+('Grace', 'Wilson', 'grace.wilson@example.com', '555-7412', 'High Risk', true, 'Invest in Stocks', '2022-02-06'),
+('Henry', 'Lee', 'henry.lee@example.com', '555-8520', 'Low Risk', true, 'Invest in Bonds', '2022-02-07'),
+('Isabella', 'Clark', 'isabella.clark@example.com', '555-4680', 'Medium Risk', false, NULL, NULL),
+('James', 'Wong', 'james.wong@example.com', '555-2468', 'High Risk', true, 'Invest in Mutual Funds', '2022-02-08'),
+('Karen', 'Garcia', 'karen.garcia@example.com', '555-1234', 'Low Risk', true, 'Invest in Real Estate', '2022-02-09'),
+('Luke', 'Martinez', 'luke.martinez@example.com', '555-3698', 'Medium Risk', false, NULL, NULL),
+('Mary', 'Gonzalez', 'mary.gonzalez@example.com', '555-9753', 'High Risk', true, 'Invest in Savings Account', '2022-02-10'),
+('Nathan', 'Johnson', 'nathan.johnson@example.com', '555-8520', 'Low Risk', true, 'Invest in Stocks', '2022-02-11'),
+('Olivia', 'Hernandez', 'olivia.hernandez@example.com', '555-1234', 'Medium Risk', false, NULL, NULL);
 
 -- Dummy data for investment table
-INSERT INTO investment (customer_id, asset_name, asset_type, date_accuired, asset_initial_value, asset_current_value) VALUES
+INSERT INTO investment (customer_id, asset_name, asset_type, date_acquired, asset_initial_value, asset_current_value) VALUES
 (1, 'Apple Inc.', 'Stocks', '2020-01-01', 5000.00, 6000.00),
 (1, 'Tesla Inc.', 'Stocks', '2020-02-01', 7000.00, 9000.00),
 (1, 'Gold', 'Commodities', '2020-03-01', 10000.00, 12000.00),
