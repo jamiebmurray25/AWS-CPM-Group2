@@ -104,7 +104,6 @@
     font-size: 0.9em;
     font-family: sans-serif;
     min-width: 400px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   }
 
   .styled-table thead tr {
@@ -121,12 +120,20 @@
 
   .styled-table tbody tr {
     border-bottom: 1px solid #dddddd;
+    transition: all 0.2s;
   }
-
+  
+  .styled-table tbody tr:hover{
+    background-color: #8bb7fc;
+  }
 
 
   .styled-table tbody tr:nth-of-type(even) {
       background-color: #f3f3f3;
+  }
+
+  .styled-table tbody tr:nth-of-type(even):hover{
+    background-color: #8bb7fc;
   }
 
   .styled-table tbody tr:last-of-type {
@@ -140,6 +147,7 @@
     text-align: center;
     align-items: center;
     justify-content: center;
+    left: 25px;
   }
 
   #delete-btn{
@@ -159,7 +167,7 @@
 
   #add-btn{
     position: relative;
-    margin-left: 1000px;
+    margin-left: 850px;
     padding: 10px 20px;
     border: 1px solid green;
     color: green;
