@@ -263,7 +263,7 @@ foreach($assets as $asset) {
           echo "<tr>";
           echo "<td>" . $key + 1 . "</td>";
           echo "<td>" . $asset["asset_name"] . "</td>";
-          echo "<td>" . $asset["date_accuired"] . "</td>";
+          echo "<td>" . $asset["date_acquired"] . "</td>";
           echo "<td>" . $asset["asset_initial_value"] . "</td>";
           echo "<td>" . $asset["asset_current_value"] . "</td>";
           echo "</tr>";
@@ -286,7 +286,7 @@ foreach($assets as $asset) {
           echo "<tr>";
           echo "<td>" . $key + 1 . "</td>";
           echo "<td>" . $asset["asset_name"] . "</td>";
-          echo "<td>" . $asset["date_accuired"] . "</td>";
+          echo "<td>" . $asset["date_acquired"] . "</td>";
           echo "<td>" . $asset["asset_initial_value"] . "</td>";
           echo "<td>" . $asset["asset_current_value"] . "</td>";
           echo "</tr>";
@@ -309,7 +309,7 @@ foreach($assets as $asset) {
           echo "<tr>";
           echo "<td>" . $key + 1 . "</td>";
           echo "<td>" . $asset["asset_name"] . "</td>";
-          echo "<td>" . $asset["date_accuired"] . "</td>";
+          echo "<td>" . $asset["date_acquired"] . "</td>";
           echo "<td>" . $asset["asset_initial_value"] . "</td>";
           echo "<td>" . $asset["asset_current_value"] . "</td>";
           echo "</tr>";
