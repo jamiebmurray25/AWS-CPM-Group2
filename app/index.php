@@ -1,14 +1,14 @@
 <!-- Setting up connection with database and select, create, and delete function-->
 <?php
 $conn = null;
-try{
-    $conn = new mysqli("localhost", "root", "", "myDB");
-    if (mysqli_connect_errno()){
-        throw new Exception("Could not connect to database.");
-    }
-    }
-catch (Exception $e){
-    echo $e->getMessage();
+try {
+  $conn = new mysqli("localhost", "root", "", "myDB");
+  if (mysqli_connect_errno()){
+    throw new Exception("Could not connect to database.");
+  }
+}
+catch (Exception $e) {
+  echo $e->getMessage();  
 }
 
 function selectAll($conn){
@@ -106,57 +106,59 @@ if (isset($_POST["action"])){
   <div id="myTopnav" class="topnav">
   <button class="button buttonSignout">Sign out</button>
 
-  <div id="main-content">
-    <h1>AWS Clients List</h1>
-    <button id="add-btn" onclick="openAddForm()">Add Client</button>
-    <div style="overflow: auto; max-height: 500px;">
-      <table class="styled-table">
-        <thead>
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-                <th>Risk Profile</th>
-                <th>Portfolio Assessed</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $results = selectAll($conn);
-            foreach ($results as $row) {
-              $clicklocation = "location.href='customers.php?id={$row['customer_id']}'";
-              $assessed = "Not Yet";
-              $assessedclr = "red";
-              $riskclr = "green";
-              if ($row["portfolio_assessed"]){
-                $assessed = "Done";
-                $assessedclr = "green";
-              }
+  <main> 
+    <div id="main-content">
+      <h1>AWS Clients List</h1>
+      <button id="add-btn" onclick="openAddForm()">Add Client</button>
+      <div style="overflow: auto; max-height: 500px;">
+        <table class="styled-table">
+          <thead>
+              <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Phone Number</th>
+                  <th>Risk Profile</th>
+                  <th>Portfolio Assessed</th>
+                  <th></th>
+              </tr>
+          </thead>
+          <tbody>
+              <?php
+              $results = selectAll($conn);
+              foreach ($results as $row) {
+                $clicklocation = "location.href='customers.php?id={$row['customer_id']}'";
+                $assessed = "Not Yet";
+                $assessedclr = "red";
+                $riskclr = "green";
+                if ($row["portfolio_assessed"]){
+                  $assessed = "Done";
+                  $assessedclr = "green";
+                }
 
-              if ($row["risk_profile"] == "High Risk"){
-                $riskclr = "red";
-              }
-              elseif($row["risk_profile"] == "Medium Risk"){
-                $riskclr = "orange";
-              }
+                if ($row["risk_profile"] == "High Risk"){
+                  $riskclr = "red";
+                }
+                else if($row["risk_profile"] == "Medium Risk"){
+                  $riskclr = "orange";
+                }
 
-              echo "<tr>";
-              echo "<td onclick={$clicklocation}>{$row['first_name']}</td>";
-              echo "<td onclick={$clicklocation}>{$row['last_name']}</td>";
-              echo "<td onclick={$clicklocation}>{$row['email']}</td>";
-              echo "<td onclick={$clicklocation}>{$row['phone_number']}</td>";
-              echo "<td onclick={$clicklocation} style='color:{$riskclr}'>{$row['risk_profile']}</td>";
-              echo "<td onclick={$clicklocation} style='color:{$assessedclr}'>{$assessed}</td>";
-              echo "<td><button id='delete-btn' onclick='openDeleteConfirmation({$row['customer_id']})'>Delete</button></td>";
-              echo "</tr>";
-            }
-            ?>
-        </tbody>
-      </table>
+                echo "<tr>";
+                echo "<td onclick={$clicklocation}>{$row['first_name']}</td>";
+                echo "<td onclick={$clicklocation}>{$row['last_name']}</td>";
+                echo "<td onclick={$clicklocation}>{$row['email']}</td>";
+                echo "<td onclick={$clicklocation}>{$row['phone_number']}</td>";
+                echo "<td onclick={$clicklocation} style='color:{$riskclr}'>{$row['risk_profile']}</td>";
+                echo "<td onclick={$clicklocation} style='color:{$assessedclr}'>{$assessed}</td>";
+                echo "<td><button id='delete-btn' onclick='openDeleteConfirmation({$row['customer_id']})'>Delete</button></td>";
+                echo "</tr>";
+              }
+              ?>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
+  </main>
 </div>
 <script>
   function openAddForm() {
@@ -196,10 +198,9 @@ if (isset($_POST["action"])){
     document.body.style.overflow = "auto";
   }
 
-
   // Close the modal when the user clicks outside of it
   document.getElementById("overlay").addEventListener("click", closeAddForm);
-   document.getElementById("overlay").addEventListener("click", closeDeleteConfirmation);
+  document.getElementById("overlay").addEventListener("click", closeDeleteConfirmation);
 </script>
 </body>
 </html>
