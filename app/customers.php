@@ -80,8 +80,8 @@ foreach($assets as $asset) {
 
 <body>
 
-  <div id="mySidenav" class="sidenav">
-    <img src="assets\images\homeicon.png" alt="Home" style="width:40px;height:40px;">
+<div id="mySidenav" class="sidenav">
+    <a href="."><img src="assets\images\homeicon.png" alt="Home" style="width:40px;height:40px;"></a>
   </div>
 
   <div id="myTopnav" class="topnav">
@@ -120,6 +120,7 @@ foreach($assets as $asset) {
           <th>Date Acquired</th>
           <th>Initial Value</th>
           <th>Current Value</th>
+          <th></th>
         </tr>
         <?php
         foreach ($stocks as $key => $asset) {
@@ -129,6 +130,7 @@ foreach($assets as $asset) {
           echo "<td>" . $asset["date_acquired"] . "</td>";
           echo "<td>" . $asset["asset_initial_value"] . "</td>";
           echo "<td>" . $asset["asset_current_value"] . "</td>";
+          echo "<td><button id='edit-btn'>Edit</button></td>";
           echo "</tr>";
         }
         ?>
@@ -143,6 +145,7 @@ foreach($assets as $asset) {
           <th>Date Acquired</th>
           <th>Initial Value</th>
           <th>Current Value</th>
+          <th></th>
         </tr>
         <?php
         foreach ($properties as $key => $asset) {
@@ -152,6 +155,7 @@ foreach($assets as $asset) {
           echo "<td>" . $asset["date_acquired"] . "</td>";
           echo "<td>" . $asset["asset_initial_value"] . "</td>";
           echo "<td>" . $asset["asset_current_value"] . "</td>";
+          echo "<td><button id='edit-btn'>Edit</button></td>";
           echo "</tr>";
         }
         ?>
@@ -166,6 +170,7 @@ foreach($assets as $asset) {
           <th>Date Acquired</th>
           <th>Initial Value</th>
           <th>Current Value</th>
+          <th></th>
         </tr>
         <?php
         foreach ($commodities as $key => $asset) {
@@ -175,13 +180,14 @@ foreach($assets as $asset) {
           echo "<td>" . $asset["date_acquired"] . "</td>";
           echo "<td>" . $asset["asset_initial_value"] . "</td>";
           echo "<td>" . $asset["asset_current_value"] . "</td>";
+          echo "<td><button id='edit-btn'>Edit</button></td>";
           echo "</tr>";
         }
         ?>
       </table>
     </div>
   </div>
-  
+
 </body>
 
 </html>

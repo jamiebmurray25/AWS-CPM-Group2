@@ -100,7 +100,7 @@ if (isset($_POST["action"])){
   <div id="overlay"></div>
   
   <div id="mySidenav" class="sidenav">
-    <a href="."> <img src="assets\images\homeicon.png" alt="Home" style="width:40px;height:40px;"></a>
+    <a href="."><img src="assets\images\homeicon.png" alt="Home" style="width:40px;height:40px;"></a>
   </div>
 
   <div id="myTopnav" class="topnav">

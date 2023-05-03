@@ -114,6 +114,7 @@ body {
 .styled-table th,
 .styled-table td {
     padding: 6px 8px;
+    text-align: center;
 }
 
 .styled-table tbody tr {
@@ -126,6 +127,17 @@ body {
 
 .styled-table tbody tr:last-of-type {
     border-bottom: 2px solid #333;
+}
+
+#edit-btn {
+    padding: 10px 20px;
+    border: 1px solid blue;
+    color: blue;
+    background-color: white;
+    border-radius: 10px;
+    font-weight: 800;
+    transition: all 0.1s;
+    cursor: pointer;
 }
 
 @media screen and (max-height: 450px) {
