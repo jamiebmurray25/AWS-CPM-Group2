@@ -104,7 +104,8 @@ if (isset($_POST["action"])){
   </div>
 
   <div id="myTopnav" class="topnav">
-  <button class="button buttonSignout">Sign out</button>
+    <button class="button buttonSignout">Sign out</button>
+  </div>
 
   <main> 
     <div id="main-content">
@@ -159,7 +160,7 @@ if (isset($_POST["action"])){
       </div>
     </div>
   </main>
-</div>
+
 <script>
   function openAddForm() {
     // Show the modal and overlay

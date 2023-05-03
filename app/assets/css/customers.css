@@ -1,0 +1,139 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #F1F1F1;
+    font-family: "Lato", sans-serif;
+}
+
+.main {
+    margin-left: 120px;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidenav {
+    height: 100%;
+    width: 90px;
+    position: fixed;
+    vertical-align: middle;
+    text-align: center;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #FFFFFF;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.topnav {
+    padding: 8px 32px 8px 8px;
+    text-align: right;
+    background-color: #F1F1F1;
+    overflow: hidden;
+}
+
+.customerprofile {
+    padding: 12px 12px 12px 12px;
+    background-color: #D9D9D9;
+}
+
+.customerreports {
+    padding: 12px 12px 12px 12px;
+    background-color: #F1F1F1;
+}
+
+.columnThree {
+    float: left;
+    width: 33.33%;
+    padding: 18px;
+}
+
+.investmentTable {
+    width: 100%;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.button {
+    border: none;
+    color: black;
+    padding: 12px 18px 12px 18px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.buttonSignout {
+    background-color: #D9D9D9;
+    border-radius: 8px;
+}
+
+.buttonEdit {
+    background-color: #FFFFFF;
+    border-radius: 8px;
+}
+
+.styled-table {
+    background-color: #D9D9D9;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    min-width: 400px;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 6px 8px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #333;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}
