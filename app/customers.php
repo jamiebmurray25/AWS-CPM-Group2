@@ -65,6 +65,25 @@ foreach($assets as $asset) {
   $portfolio_value += $asset["asset_current_value"];
 }
 
+function deleteInvestment($conn, $id){
+  if (mysqli_query($conn, "DELETE FROM investment WHERE investment_id = {intval($id)}")){
+  }
+  else{
+    echo mysqli_error($conn);
+  }
+}
+
+if (isset($_POST["action"])){ 
+  switch ($_POST["action"]) {
+    case "delete":
+      deleteInvestment($conn,$_POST["investmentId"]);
+      break;
+   // Add edit and any other actions here.
+    default:
+      break;
+  }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -79,6 +98,20 @@ foreach($assets as $asset) {
 </head>
 
 <body>
+
+<div class="modal" id="delete-confirmation">
+    <div class="modal-content" id = "confirmation-content">
+      <h2>Are you sure ?</h2>
+      <h3>You are going to delete an asset.</h3>
+      <form method="POST" onsubmit="setTimeout(function(){window.location.reload();},10);">
+        <input type="hidden" name="action" value="delete">
+        <input type="hidden" name="investmentId" value="">
+        <button id="submit-btn" type="submit">Yes</button>
+      </form>
+    </div>
+  </div>
+  
+  <div id="overlay"></div>
 
 <div id="mySidenav" class="sidenav">
     <a href="."><img src="assets\images\homeicon.png" alt="Home" style="width:40px;height:40px;"></a>
@@ -131,6 +164,7 @@ foreach($assets as $asset) {
           echo "<td>" . $asset["asset_initial_value"] . "</td>";
           echo "<td>" . $asset["asset_current_value"] . "</td>";
           echo "<td><button id='edit-btn'>Edit</button></td>";
+          echo "<td><button id='delete-btn' type='submit' onclick='openDeleteConfirmation({$asset['investment_id']})'>Delete</button></td>";
           echo "</tr>";
         }
         ?>
@@ -156,6 +190,7 @@ foreach($assets as $asset) {
           echo "<td>" . $asset["asset_initial_value"] . "</td>";
           echo "<td>" . $asset["asset_current_value"] . "</td>";
           echo "<td><button id='edit-btn'>Edit</button></td>";
+          echo "<td><button id='delete-btn' type='submit' onclick='openDeleteConfirmation({$asset['investment_id']})'>Delete</button></td>";
           echo "</tr>";
         }
         ?>
@@ -181,6 +216,7 @@ foreach($assets as $asset) {
           echo "<td>" . $asset["asset_initial_value"] . "</td>";
           echo "<td>" . $asset["asset_current_value"] . "</td>";
           echo "<td><button id='edit-btn'>Edit</button></td>";
+          echo "<td><button id='delete-btn' type='submit' onclick='openDeleteConfirmation({$asset['investment_id']})'>Delete</button></td>";
           echo "</tr>";
         }
         ?>
@@ -189,5 +225,17 @@ foreach($assets as $asset) {
   </div>
 
 </body>
+
+<script>
+  function openDeleteConfirmation(id) {
+    // Show the modal and overlay
+    document.querySelector("#delete-confirmation").style.display = "block";
+    document.querySelector('input[name="investmentId"]').value = id;
+    document.querySelector("#overlay").style.display = "block";
+
+    // Disable scrolling on the background
+    document.body.style.overflow = "hidden";
+  }
+</script>
 
 </html>
