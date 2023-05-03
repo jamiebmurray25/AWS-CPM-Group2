@@ -17,17 +17,25 @@ function selectAll($conn){
   return $results;
 }
 
+function addClient($conn){
+  $sql = "INSERT INTO customer (first_name, last_name, email, phone_number, risk_profile, portfolio_assessed) VALUES ('{$_POST['first-name']}', '{$_POST['last-name']}', '{$_POST['email']}', '{$_POST['phone']}', '{$_POST['risk-profile']}', false)";
+  mysqli_query($conn, $sql);
+}
+
+function updateClientInvestment($conn, $id) {
+  if (mysqli_query($conn, "")) {
+
+  } else {
+    echo mysqli_error($conn); 
+  }
+}
+
 function deleteClient($conn, $id){
   if (mysqli_query($conn, "DELETE FROM customer WHERE customer_id = {intval($id)}")){
   }
   else{
     echo mysqli_error($conn);
   }
-}
-
-function addClient($conn){
-  $sql = "INSERT INTO customer (first_name, last_name, email, phone_number, risk_profile, portfolio_assessed) VALUES ('{$_POST['first-name']}', '{$_POST['last-name']}', '{$_POST['email']}', '{$_POST['phone']}', '{$_POST['risk-profile']}', false)";
-  mysqli_query($conn, $sql);
 }
 
 if (isset($_POST["action"])){ 
@@ -37,6 +45,10 @@ if (isset($_POST["action"])){
       break;
     case "add":
       addClient($conn);
+      break; 
+    case "update":
+      updateClientInvestment($conn,$_POST["customerId"]);
+      break; 
     default:
       break;
   }

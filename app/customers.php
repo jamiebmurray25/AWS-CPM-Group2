@@ -130,23 +130,45 @@ if (isset($_POST["action"])){
 	</div>
 </div>
 
+<!-- CODE FOR THE EDIT INVESTMENT MODAL -->
+<div class="modal" id="edit-form">
+	<div class="modal-content" id="form-content">
+		<h2>Edit Investment Entry Information</h2>
+    <form action="." method="POST" id="investment-form">
+      <input type="hidden" name="action" value="update">
+      <label>Investment field to update</label>
+      <select id="field-to-update" name="field-to-update" required>
+        <option value="">--Select--</option>
+        <option value="asset_name">Name</option>
+        <option value="date_acquired">Date Acquired</option>
+        <option value="asset_initial_value">Initial Value</option>
+        <option value="asset_current_value">Current Value</option>
+      </select>
+
+      <div id="additional-inputs"></div>
+
+      <button type="submit">Submit</button> 
+    </form>
+	</div>
+</div>
+
 <div class="modal" id="delete-confirmation">
-    <div class="modal-content" id = "confirmation-content">
-      <h2>Are you sure ?</h2>
-      <h3>You are going to delete an asset.</h3>
-      <form method="POST" onsubmit="setTimeout(function(){window.location.reload();},10);">
-        <input type="hidden" name="action" value="delete">
-        <input type="hidden" name="investmentId" value="">
-        <button id="submit-btn" type="submit">Yes</button>
-      </form>
-    </div>
+  <div class="modal-content" id = "confirmation-content">
+    <h2>Are you sure ?</h2>
+    <h3>You are going to delete an asset.</h3>
+    <form method="POST" onsubmit="setTimeout(function(){window.location.reload();},10);">
+      <input type="hidden" name="action" value="delete">
+      <input type="hidden" name="investmentId" value="">
+      <button id="submit-btn" type="submit">Yes</button>
+    </form>
   </div>
+</div>
   
-  <div id="overlay"></div>
+<div id="overlay"></div>
 
 <div id="mySidenav" class="sidenav">
-    <a href="."><img src="assets\images\homeicon.png" alt="Home" style="width:40px;height:40px;"></a>
-  </div>
+  <a href="."><img src="assets\images\homeicon.png" alt="Home" style="width:40px;height:40px;"></a>
+</div>
 
   <div id="myTopnav" class="topnav">
     <button class="button buttonSignout">Sign out</button>
@@ -195,7 +217,7 @@ if (isset($_POST["action"])){
           echo "<td>" . $asset["date_acquired"] . "</td>";
           echo "<td>" . $asset["asset_initial_value"] . "</td>";
           echo "<td>" . $asset["asset_current_value"] . "</td>";
-          echo "<td><button id='edit-btn'>Edit</button></td>";
+          echo "<td><button id='edit-btn' type='submit' onclick='openEditForm()'>Edit</button></td>";
           echo "<td><button id='delete-btn' type='submit' onclick='openDeleteConfirmation({$asset['investment_id']})'>Delete</button></td>";
           echo "</tr>";
         }
@@ -221,7 +243,7 @@ if (isset($_POST["action"])){
           echo "<td>" . $asset["date_acquired"] . "</td>";
           echo "<td>" . $asset["asset_initial_value"] . "</td>";
           echo "<td>" . $asset["asset_current_value"] . "</td>";
-          echo "<td><button id='edit-btn'>Edit</button></td>";
+          echo "<td><button id='edit-btn' type='submit' onclick='openEditForm()'>Edit</button></td>";
           echo "<td><button id='delete-btn' type='submit' onclick='openDeleteConfirmation({$asset['investment_id']})'>Delete</button></td>";
           echo "</tr>";
         }
@@ -247,7 +269,7 @@ if (isset($_POST["action"])){
           echo "<td>" . $asset["date_acquired"] . "</td>";
           echo "<td>" . $asset["asset_initial_value"] . "</td>";
           echo "<td>" . $asset["asset_current_value"] . "</td>";
-          echo "<td><button id='edit-btn'>Edit</button></td>";
+          echo "<td><button id='edit-btn' type='submit' onclick='openEditForm()'>Edit</button></td>";
           echo "<td><button id='delete-btn' type='submit' onclick='openDeleteConfirmation({$asset['investment_id']})'>Delete</button></td>";
           echo "</tr>";
         }
@@ -277,6 +299,51 @@ if (isset($_POST["action"])){
     document.body.style.overflow = "auto";
   }
 
+  // EDIT FORM JAVASCRIPT
+
+  // Get the form and the div where the additional inputs will be added
+	const investmentForm = document.getElementById('investment-form');
+	const additionalInputsDiv = document.getElementById('additional-inputs');
+
+	// Listen for changes to the selected option
+	const fieldToUpdateSelect = document.getElementById('field-to-update');
+	fieldToUpdateSelect.addEventListener('change', () => {
+    // Get the selected option value
+    const selectedOption = fieldToUpdateSelect.value;
+
+    // Clear any existing additional inputs
+    additionalInputsDiv.innerHTML = '';
+
+    // Add additional inputs based on the selected option
+    if (selectedOption === 'asset_name') {
+      additionalInputsDiv.innerHTML = '<label>Proposed value for Name:</label><input type="text" name="asset_name" required>';
+    } else if (selectedOption === 'date_acquired') {
+      additionalInputsDiv.innerHTML = '<label>Proposed value for Date Acquired:</label><input type="date" name="date_acquired" required>';
+    } else if (selectedOption === 'asset_initial_value') {
+      additionalInputsDiv.innerHTML = '<label>Proposed value for Intial Value:</label><input type="number" name="asset_initial_value" required>'; 
+    } else if (selectedOption === 'asset_current_value') {
+      additionalInputsDiv.innerHTML = '<label>Proposed value for Current Value:</label><input type="number" name="asset_current_value" required>'; 
+    }
+  }); 
+
+  function openEditForm() {
+    // Show the modal and overlay
+    document.querySelector("#edit-form").style.display = "block";
+    document.querySelector("#overlay").style.display = "block";
+
+    // Disable scrolling on the background
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeEditForm() {
+    // Hide the modal and overlay
+    document.querySelector("#edit-form").style.display = "none";
+    document.querySelector("#overlay").style.display = "none";
+
+    // Enable scrolling on the background
+    document.body.style.overflow = "auto";
+  }
+
   function openDeleteConfirmation(id) {
     // Show the modal and overlay
     document.querySelector("#delete-confirmation").style.display = "block";
@@ -298,6 +365,7 @@ if (isset($_POST["action"])){
 
   // Close the modal when the user clicks outside of it
   document.getElementById("overlay").addEventListener("click", closeAddForm);
+  document.getElementById("overlay").addEventListener("click", closeEditForm);
   document.getElementById("overlay").addEventListener("click", closeDeleteConfirmation);
 </script>
 
