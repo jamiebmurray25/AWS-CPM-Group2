@@ -99,6 +99,37 @@ if (isset($_POST["action"])){
 
 <body>
 
+<!-- CODE FOR THE ADD INVESTMENT MODAL -->
+<div class="modal" id="add-form">
+	<div class="modal-content" id="form-content">
+		<h2>New Investment Information</h2>
+			<form action="." method="POST">
+				<input type="hidden" name="action" value="add">
+				<label for="investment-type">Investment Type:</label>
+				<select id="investment-type" name="investment-type" required>
+					<option value="">--Select--</option>
+					<option value="Stocks">Stocks</option>
+					<option value="Properties">Properties</option>
+					<option value="Commodities">Commodities</option>
+				</select>
+				
+				<label for="asset_name">Name:</label>
+				<input type="text" id="asset_name" name="asset_name" required>
+				
+				<label for="date_acquired">Date Acquired:</label>
+				<input type="date" id="date_acquired" name="date_acquired" required>
+				
+				<label for="asset_initial_value">Initial Value:</label>
+				<input type="number" id="asset_initial_value" name="asset_initial_value" required>
+				
+				<label for="asset_current_value">Current Value:</label>
+				<input type="number" id="asset_current_value" name="asset_current_value" required>
+				
+				<button type="submit">Submit</button>
+			</form>
+	</div>
+</div>
+
 <div class="modal" id="delete-confirmation">
     <div class="modal-content" id = "confirmation-content">
       <h2>Are you sure ?</h2>
@@ -125,6 +156,7 @@ if (isset($_POST["action"])){
     <div id="myCustomerProfile" class="customerprofile">
       <h1>Customer Profile</h1>
       <button class="button buttonEdit">Edit profile</button>
+      <button class="button buttonAdd" onclick='openAddForm()'>Add Investment</button>
       <hr>
       <div class="row">
         <div class="columnThree">
@@ -227,6 +259,24 @@ if (isset($_POST["action"])){
 </body>
 
 <script>
+  function openAddForm() {
+    // Show the modal and overlay
+    document.querySelector("#add-form").style.display = "block";
+    document.querySelector("#overlay").style.display = "block";
+
+    // Disable scrolling on the background
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeAddForm() {
+    // Hide the modal and overlay
+    document.querySelector("#add-form").style.display = "none";
+    document.querySelector("#overlay").style.display = "none";
+
+    // Enable scrolling on the background
+    document.body.style.overflow = "auto";
+  }
+
   function openDeleteConfirmation(id) {
     // Show the modal and overlay
     document.querySelector("#delete-confirmation").style.display = "block";
@@ -236,6 +286,19 @@ if (isset($_POST["action"])){
     // Disable scrolling on the background
     document.body.style.overflow = "hidden";
   }
+
+  function closeDeleteConfirmation() {
+    // Hide the modal and overlay
+    document.querySelector("#delete-confirmation").style.display = "none";
+    document.querySelector("#overlay").style.display = "none";
+
+    // Enable scrolling on the background
+    document.body.style.overflow = "auto";
+  }
+
+  // Close the modal when the user clicks outside of it
+  document.getElementById("overlay").addEventListener("click", closeAddForm);
+  document.getElementById("overlay").addEventListener("click", closeDeleteConfirmation);
 </script>
 
 </html>
