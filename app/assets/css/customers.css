@@ -140,6 +140,98 @@ body {
     cursor: pointer;
 }
 
+#delete-btn{
+    padding: 10px 20px;
+    border: 1px solid red;
+    color: red;
+    background-color: white;
+    border-radius: 10px;
+    font-weight: 800;
+    transition: all 0.1s;
+    cursor: pointer;
+  }
+
+/* Hide the modal and overlay by default */
+.modal,
+#overlay {
+  display: none;
+}
+
+/* Style the overlay to cover the whole screen */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  /* Make the overlay slightly transparent */
+  backdrop-filter: blur(5px);
+}
+
+/* Center the modal vertically and horizontally */
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+/* Style the modal content */
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+/* Center the form and set the font */
+form {
+    width: 500px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Style the labels */
+  form label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  /* Style the input fields */
+  form input, form select {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  /* Style the submit button */
+  form button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: green;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  /* Change the submit button color on hover */
+  form button:hover {
+    background-color: #3e8e41;
+  }
+
 @media screen and (max-height: 450px) {
     .sidenav {
         padding-top: 15px;
